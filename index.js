@@ -59,7 +59,7 @@ client.once(Events.ClientReady, (c) => {
       awake.push(`${name} <@${userId}>${message}`.trim());
     });
 
-    const channel = g.channels.cache.find((p) => p.name === "sleep");
+    const channel = g.channels.cache.find((p) => p.name === "bot-testing");
     if (awake.length) {
       const line = phrases[parseInt(Math.random() * phrases.length)];
 
