@@ -77,7 +77,7 @@ client.once(Events.ClientReady, (c) => {
       awake.sort();
       const res = awake.map((a) => a.split(" ").slice(1).join(" "));
 
-      channel.send({ content: res.join("\n"), embeds: [embed] });
+      channel.send({ content: res.join("\n") + " ", embeds: [embed] });
     } else {
       channel.send("Congrats! 🥳 Everyone slept on time!");
     }

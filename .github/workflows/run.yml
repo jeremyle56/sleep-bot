@@ -21,10 +21,7 @@ jobs:
         run: npm install
 
       - name: Run Bot
-        run: node .
-
-      - name: Wait for 1 minute
-        run: sleep 20
+        run: timeout 20s node .
 
       - name: Kill Bot
         run: pkill -f "node ."
