@@ -21,4 +21,4 @@ jobs:
         run: npm install
 
       - name: Run Bot
-        run: timeout 20s node . || (pkill -f "node ." && exit 0)
+        run: timeout 20s bash -c 'node .'
