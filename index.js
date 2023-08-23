@@ -1,5 +1,11 @@
 // Require the necessary discord.js classes
-const { Client, Collection, Events, GatewayIntentBits } = require("discord.js");
+const {
+  Client,
+  Collection,
+  EmbedBuilder,
+  Events,
+  GatewayIntentBits,
+} = require("discord.js");
 const { token } = require("./config.json");
 const fs = require("node:fs");
 const path = require("node:path");
@@ -59,18 +65,19 @@ client.once(Events.ClientReady, (c) => {
       awake.push(`${name} <@${userId}>${message}`.trim());
     });
 
-    const channel = g.channels.cache.find((p) => p.name === "bot-testing");
+    const channel = g.channels.cache.find((p) => p.name === "sleep");
     if (awake.length) {
       const line = phrases[parseInt(Math.random() * phrases.length)];
 
+      const embed = new EmbedBuilder()
+        .setColor("Random")
+        .setTitle("SLEEP!")
+        .setDescription(line);
+
       awake.sort();
-      const res = [
-        "# SLEEP!",
-        line,
-        "",
-        ...awake.map((a) => a.split(" ").slice(1).join(" ")),
-      ];
-      channel.send(res.join("\n"));
+      const res = awake.map((a) => a.split(" ").slice(1).join(" "));
+
+      channel.send({ content: res.join("\n"), embeds: [embed] });
     } else {
       channel.send("Congrats! 🥳 Everyone slept on time!");
     }

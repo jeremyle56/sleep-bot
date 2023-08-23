@@ -7,7 +7,9 @@ module.exports = {
     .setName("fact")
     .setDescription("Provides up to 30 random facts")
     .addIntegerOption((option) =>
-      option.setName("number").setDescription("number of facts")
+      option
+        .setName("number")
+        .setDescription("number of facts between 1 and 30")
     ),
   async execute(interaction) {
     const number = (await interaction.options.getInteger("number")) ?? 1;
