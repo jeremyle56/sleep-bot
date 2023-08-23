@@ -21,4 +21,4 @@ jobs:
         run: npm install
 
       - name: Run Bot
-        run: timeout --kill-after=20s node .
+        run: timeout --preserve-status 15s node .
