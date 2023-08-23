@@ -21,4 +21,4 @@ jobs:
         run: npm install
 
       - name: Run Bot
-        run: timeout 20s bash -c 'node .'
+        run: timeout -k 20s node .
