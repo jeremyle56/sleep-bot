@@ -1,5 +1,5 @@
 const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
-const request = require("request");
+const bent = require("bent");
 const { facts } = require("../../config.json");
 
 module.exports = {
@@ -13,30 +13,19 @@ module.exports = {
     ),
   async execute(interaction) {
     const number = (await interaction.options.getInteger("number")) ?? 1;
-    await request.get(
-      {
-        url: "https://api.api-ninjas.com/v1/facts?limit=" + number,
-        headers: {
-          "X-Api-Key": facts,
-        },
-      },
-      function (error, response, body) {
-        if (error) return interaction.error("Request failed:", error);
-        else if (response.statusCode != 200)
-          return interaction.error(
-            "Error:",
-            response.statusCode,
-            body.toString("utf8")
-          );
-        else {
-          const res = [];
-          body = JSON.parse(body);
-          for (const [index, element] of body.entries()) {
-            res.push(`${index}. ${element.fact}`);
-          }
-          return interaction.reply(res.join("\n"));
-        }
-      }
-    );
+    if (number > 30) {
+      return interaction.error(
+        "Error: The number you entered is larger than 30."
+      );
+    }
+
+    const getRequest = bent("https://api.api-ninjas.com/v1/", "GET", "string");
+    const obj = await getRequest("facts?limit=" + number, null, {
+      "X-Api-Key": facts,
+    });
+
+    const body = JSON.parse(obj);
+    const res = body.map((a, b) => `${b + 1}. ${a.fact}`);
+    return interaction.reply(res.join("\n"));
   },
 };

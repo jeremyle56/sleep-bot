@@ -1,7 +1,7 @@
 {
   "main": "index.js",
   "dependencies": {
-    "discord.js": "^14.13.0",
-    "request": "^2.88.2"
+    "bent": "^7.3.12",
+    "discord.js": "^14.13.0"
   }
 }
