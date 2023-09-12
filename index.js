@@ -75,7 +75,7 @@ client.once(Events.ClientReady, (c) => {
         .setDescription(line);
 
       awake.sort();
-      const res = awake.map((a) => a.split(" ").slice(1).join(" "));
+      const res = awake.map((a) => a.replace(/.*<@([0-9]+)>/, "<@$1>"));
 
       channel.send({ content: res.join("\n") + " ", embeds: [embed] });
     } else {
