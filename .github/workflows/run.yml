@@ -11,6 +11,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "18.x"
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
 
       - name: Create config.json
         run: |
@@ -20,7 +23,7 @@ jobs:
           echo '}' >> config.json
 
       - name: Install Dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Run Bot
         run: timeout 10s node . || true
