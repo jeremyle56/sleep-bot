@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: "57 12 * * *"
+    - cron: "56 12 * * *"
 jobs:
   run-bot:
     runs-on: ubuntu-latest
